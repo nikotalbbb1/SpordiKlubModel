@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d79bfea12dd14725b613be70185318d8" Name="Diagram1" >
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Liikme" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.LiikmelisuePaketti" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Treener" Width="1.5" PointX="8.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.LiikmeLiikmelisuePaketti" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Saal" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Registreerimine" Width="1.5" PointX="0.625" PointY="3.75" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.LiikmeRegistreerimine" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Voistlus" Width="1.5" PointX="5.875" PointY="0.75" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Spordiala" Width="1.5" PointX="5.875" PointY="3.625" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.SpordialaVoistlus" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.LiikVoistluses" Width="1.5" PointX="3.625" PointY="3.625" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.LiikmeLiikVoistluses" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.VoistlusLiikVoistluses" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Treening" Width="1.5" PointX="5.625" PointY="6.625" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.SaalTreening" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.TreenerTreening" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.RegistreerimineTreening" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Osalemine" Width="1.5" PointX="3.625" PointY="5.625" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.LiikVoistlusesOsalemine" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Ost" Width="1.5" PointX="10.25" PointY="3.75" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Toode" Width="1.5" PointX="12" PointY="6" />
+        <EntityTypeShape EntityType="andmebaasSpordiklubmodel.Osturida" Width="1.5" PointX="9.375" PointY="7.75" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.OstOsturida" />
+        <AssociationConnector Association="andmebaasSpordiklubmodel.ToodeOsturida" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

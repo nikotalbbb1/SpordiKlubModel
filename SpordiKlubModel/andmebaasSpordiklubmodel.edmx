@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="andmebaasSpordiklubmodel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="andmebaasSpordiklubmodelStoreContainer">
+    <EntitySet Name="LiikmeSet" EntityType="andmebaasSpordiklubmodel.Store.LiikmeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LiikmelisuePakettiSet" EntityType="andmebaasSpordiklubmodel.Store.LiikmelisuePakettiSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TreenerSet" EntityType="andmebaasSpordiklubmodel.Store.TreenerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SaalSet" EntityType="andmebaasSpordiklubmodel.Store.SaalSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RegistreerimineSet" EntityType="andmebaasSpordiklubmodel.Store.RegistreerimineSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VoistlusSet" EntityType="andmebaasSpordiklubmodel.Store.VoistlusSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SpordialaSet" EntityType="andmebaasSpordiklubmodel.Store.SpordialaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LiikVoistlusesSet" EntityType="andmebaasSpordiklubmodel.Store.LiikVoistlusesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TreeningSet" EntityType="andmebaasSpordiklubmodel.Store.TreeningSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LiikmeLiikmelisuePaketti" Association="andmebaasSpordiklubmodel.Store.LiikmeLiikmelisuePaketti">
+      <End Role="Liikme" EntitySet="LiikmeSet" />
+      <End Role="LiikmelisuePaketti" EntitySet="LiikmelisuePakettiSet" />
+    </AssociationSet>
+    <AssociationSet Name="LiikmeRegistreerimine" Association="andmebaasSpordiklubmodel.Store.LiikmeRegistreerimine">
+      <End Role="Liikme" EntitySet="LiikmeSet" />
+      <End Role="Registreerimine" EntitySet="RegistreerimineSet" />
+    </AssociationSet>
+    <AssociationSet Name="SpordialaVoistlus" Association="andmebaasSpordiklubmodel.Store.SpordialaVoistlus">
+      <End Role="Spordiala" EntitySet="SpordialaSet" />
+      <End Role="Voistlus" EntitySet="VoistlusSet" />
+    </AssociationSet>
+    <AssociationSet Name="LiikmeLiikVoistluses" Association="andmebaasSpordiklubmodel.Store.LiikmeLiikVoistluses">
+      <End Role="Liikme" EntitySet="LiikmeSet" />
+      <End Role="LiikVoistluses" EntitySet="LiikVoistlusesSet" />
+    </AssociationSet>
+    <AssociationSet Name="VoistlusLiikVoistluses" Association="andmebaasSpordiklubmodel.Store.VoistlusLiikVoistluses">
+      <End Role="Voistlus" EntitySet="VoistlusSet" />
+      <End Role="LiikVoistluses" EntitySet="LiikVoistlusesSet" />
+    </AssociationSet>
+    <AssociationSet Name="SaalTreening" Association="andmebaasSpordiklubmodel.Store.SaalTreening">
+      <End Role="Saal" EntitySet="SaalSet" />
+      <End Role="Treening" EntitySet="TreeningSet" />
+    </AssociationSet>
+    <AssociationSet Name="TreenerTreening" Association="andmebaasSpordiklubmodel.Store.TreenerTreening">
+      <End Role="Treener" EntitySet="TreenerSet" />
+      <End Role="Treening" EntitySet="TreeningSet" />
+    </AssociationSet>
+    <AssociationSet Name="RegistreerimineTreening" Association="andmebaasSpordiklubmodel.Store.RegistreerimineTreening">
+      <End Role="Registreerimine" EntitySet="RegistreerimineSet" />
+      <End Role="Treening" EntitySet="TreeningSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LiikmeSet">
+    <Key>
+      <PropertyRef Name="LiikmeId" />
+    </Key>
+    <Property Name="LiikmeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="eesnimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="perekonnanimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sunniaeg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="epost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefon" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LiikmelisuePakettiSet">
+    <Key>
+      <PropertyRef Name="PaketID" />
+    </Key>
+    <Property Name="PaketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kuutasu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Liikme_LiikmeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TreenerSet">
+    <Key>
+      <PropertyRef Name="TreenerId" />
+    </Key>
+    <Property Name="TreenerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="epost" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="eriala" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SaalSet">
+    <Key>
+      <PropertyRef Name="SaalID" />
+    </Key>
+    <Property Name="SaalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="number" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="maksimaalnemahutavus" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegistreerimineSet">
+    <Key>
+      <PropertyRef Name="RegistreerimineId" />
+    </Key>
+    <Property Name="RegistreerimineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="registreerimisekuupaev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Liikme_LiikmeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VoistlusSet">
+    <Key>
+      <PropertyRef Name="VoistlusId" />
+    </Key>
+    <Property Name="VoistlusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kuupaev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="asukoht" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Spordiala_SporidalaID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SpordialaSet">
+    <Key>
+      <PropertyRef Name="SporidalaID" />
+    </Key>
+    <Property Name="SporidalaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LiikVoistlusesSet">
+    <Key>
+      <PropertyRef Name="LiikVoistlusesID" />
+    </Key>
+    <Property Name="LiikVoistlusesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Liikme_LiikmeId" Type="int" Nullable="false" />
+    <Property Name="Voistlus_VoistlusId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TreeningSet">
+    <Key>
+      <PropertyRef Name="TreeningID" />
+    </Key>
+    <Property Name="TreeningID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kestus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="raskusaste" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="aeg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Saal_SaalID" Type="int" Nullable="false" />
+    <Property Name="Treener_TreenerId" Type="int" Nullable="false" />
+    <Property Name="Registreerimine_RegistreerimineId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="LiikmeLiikmelisuePaketti">
+    <End Role="Liikme" Type="andmebaasSpordiklubmodel.Store.LiikmeSet" Multiplicity="1" />
+    <End Role="LiikmelisuePaketti" Type="andmebaasSpordiklubmodel.Store.LiikmelisuePakettiSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Liikme">
+        <PropertyRef Name="LiikmeId" />
+      </Principal>
+      <Dependent Role="LiikmelisuePaketti">
+        <PropertyRef Name="Liikme_LiikmeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LiikmeRegistreerimine">
+    <End Role="Liikme" Type="andmebaasSpordiklubmodel.Store.LiikmeSet" Multiplicity="1" />
+    <End Role="Registreerimine" Type="andmebaasSpordiklubmodel.Store.RegistreerimineSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Liikme">
+        <PropertyRef Name="LiikmeId" />
+      </Principal>
+      <Dependent Role="Registreerimine">
+        <PropertyRef Name="Liikme_LiikmeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SpordialaVoistlus">
+    <End Role="Spordiala" Type="andmebaasSpordiklubmodel.Store.SpordialaSet" Multiplicity="1" />
+    <End Role="Voistlus" Type="andmebaasSpordiklubmodel.Store.VoistlusSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spordiala">
+        <PropertyRef Name="SporidalaID" />
+      </Principal>
+      <Dependent Role="Voistlus">
+        <PropertyRef Name="Spordiala_SporidalaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LiikmeLiikVoistluses">
+    <End Role="Liikme" Type="andmebaasSpordiklubmodel.Store.LiikmeSet" Multiplicity="1" />
+    <End Role="LiikVoistluses" Type="andmebaasSpordiklubmodel.Store.LiikVoistlusesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Liikme">
+        <PropertyRef Name="LiikmeId" />
+      </Principal>
+      <Dependent Role="LiikVoistluses">
+        <PropertyRef Name="Liikme_LiikmeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VoistlusLiikVoistluses">
+    <End Role="Voistlus" Type="andmebaasSpordiklubmodel.Store.VoistlusSet" Multiplicity="1" />
+    <End Role="LiikVoistluses" Type="andmebaasSpordiklubmodel.Store.LiikVoistlusesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Voistlus">
+        <PropertyRef Name="VoistlusId" />
+      </Principal>
+      <Dependent Role="LiikVoistluses">
+        <PropertyRef Name="Voistlus_VoistlusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SaalTreening">
+    <End Role="Saal" Type="andmebaasSpordiklubmodel.Store.SaalSet" Multiplicity="1" />
+    <End Role="Treening" Type="andmebaasSpordiklubmodel.Store.TreeningSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Saal">
+        <PropertyRef Name="SaalID" />
+      </Principal>
+      <Dependent Role="Treening">
+        <PropertyRef Name="Saal_SaalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TreenerTreening">
+    <End Role="Treener" Type="andmebaasSpordiklubmodel.Store.TreenerSet" Multiplicity="1" />
+    <End Role="Treening" Type="andmebaasSpordiklubmodel.Store.TreeningSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Treener">
+        <PropertyRef Name="TreenerId" />
+      </Principal>
+      <Dependent Role="Treening">
+        <PropertyRef Name="Treener_TreenerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegistreerimineTreening">
+    <End Role="Registreerimine" Type="andmebaasSpordiklubmodel.Store.RegistreerimineSet" Multiplicity="1" />
+    <End Role="Treening" Type="andmebaasSpordiklubmodel.Store.TreeningSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registreerimine">
+        <PropertyRef Name="RegistreerimineId" />
+      </Principal>
+      <Dependent Role="Treening">
+        <PropertyRef Name="Registreerimine_RegistreerimineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="andmebaasSpordiklubmodel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="andmebaasSpordiklubmodelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LiikmeSet" EntityType="andmebaasSpordiklubmodel.Liikme" />
+          <EntitySet Name="LiikmelisuePakettiSet" EntityType="andmebaasSpordiklubmodel.LiikmelisuePaketti" />
+          <EntitySet Name="TreenerSet" EntityType="andmebaasSpordiklubmodel.Treener" />
+          <AssociationSet Name="LiikmeLiikmelisuePaketti" Association="andmebaasSpordiklubmodel.LiikmeLiikmelisuePaketti">
+            <End Role="Liikme" EntitySet="LiikmeSet" />
+            <End Role="LiikmelisuePaketti" EntitySet="LiikmelisuePakettiSet" />
+          </AssociationSet>
+          <EntitySet Name="SaalSet" EntityType="andmebaasSpordiklubmodel.Saal" />
+          <EntitySet Name="RegistreerimineSet" EntityType="andmebaasSpordiklubmodel.Registreerimine" />
+          <AssociationSet Name="LiikmeRegistreerimine" Association="andmebaasSpordiklubmodel.LiikmeRegistreerimine">
+            <End Role="Liikme" EntitySet="LiikmeSet" />
+            <End Role="Registreerimine" EntitySet="RegistreerimineSet" />
+          </AssociationSet>
+          <EntitySet Name="VoistlusSet" EntityType="andmebaasSpordiklubmodel.Voistlus" />
+          <EntitySet Name="SpordialaSet" EntityType="andmebaasSpordiklubmodel.Spordiala" />
+          <AssociationSet Name="SpordialaVoistlus" Association="andmebaasSpordiklubmodel.SpordialaVoistlus">
+            <End Role="Spordiala" EntitySet="SpordialaSet" />
+            <End Role="Voistlus" EntitySet="VoistlusSet" />
+          </AssociationSet>
+          <EntitySet Name="LiikVoistlusesSet" EntityType="andmebaasSpordiklubmodel.LiikVoistluses" />
+          <AssociationSet Name="LiikmeLiikVoistluses" Association="andmebaasSpordiklubmodel.LiikmeLiikVoistluses">
+            <End Role="Liikme" EntitySet="LiikmeSet" />
+            <End Role="LiikVoistluses" EntitySet="LiikVoistlusesSet" />
+          </AssociationSet>
+          <AssociationSet Name="VoistlusLiikVoistluses" Association="andmebaasSpordiklubmodel.VoistlusLiikVoistluses">
+            <End Role="Voistlus" EntitySet="VoistlusSet" />
+            <End Role="LiikVoistluses" EntitySet="LiikVoistlusesSet" />
+          </AssociationSet>
+          <EntitySet Name="TreeningSet" EntityType="andmebaasSpordiklubmodel.Treening" />
+          <AssociationSet Name="SaalTreening" Association="andmebaasSpordiklubmodel.SaalTreening">
+            <End Role="Saal" EntitySet="SaalSet" />
+            <End Role="Treening" EntitySet="TreeningSet" />
+          </AssociationSet>
+          <AssociationSet Name="TreenerTreening" Association="andmebaasSpordiklubmodel.TreenerTreening">
+            <End Role="Treener" EntitySet="TreenerSet" />
+            <End Role="Treening" EntitySet="TreeningSet" />
+          </AssociationSet>
+          <AssociationSet Name="RegistreerimineTreening" Association="andmebaasSpordiklubmodel.RegistreerimineTreening">
+            <End Role="Registreerimine" EntitySet="RegistreerimineSet" />
+            <End Role="Treening" EntitySet="TreeningSet" />
+          </AssociationSet>
+          <EntitySet Name="OsalemineSet" EntityType="andmebaasSpordiklubmodel.Osalemine" />
+          <AssociationSet Name="LiikVoistlusesOsalemine" Association="andmebaasSpordiklubmodel.LiikVoistlusesOsalemine">
+            <End Role="LiikVoistluses" EntitySet="LiikVoistlusesSet" />
+            <End Role="Osalemine" EntitySet="OsalemineSet" />
+          </AssociationSet>
+          <EntitySet Name="OstSet" EntityType="andmebaasSpordiklubmodel.Ost" />
+          <EntitySet Name="ToodeSet" EntityType="andmebaasSpordiklubmodel.Toode" />
+          <EntitySet Name="OsturidaSet" EntityType="andmebaasSpordiklubmodel.Osturida" />
+          <AssociationSet Name="OstOsturida" Association="andmebaasSpordiklubmodel.OstOsturida">
+            <End Role="Ost" EntitySet="OstSet" />
+            <End Role="Osturida" EntitySet="OsturidaSet" />
+          </AssociationSet>
+          <AssociationSet Name="ToodeOsturida" Association="andmebaasSpordiklubmodel.ToodeOsturida">
+            <End Role="Toode" EntitySet="ToodeSet" />
+            <End Role="Osturida" EntitySet="OsturidaSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Liikme">
+          <Key>
+            <PropertyRef Name="LiikmeId" />
+          </Key>
+          <Property Name="LiikmeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eesnimi" Type="String" Nullable="false" />
+          <Property Name="perekonnanimi" Type="String" Nullable="false" />
+          <Property Name="sunniaeg" Type="DateTime" Nullable="false" />
+          <Property Name="epost" Type="String" Nullable="false" />
+          <Property Name="telefon" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LiikmelisuePaketti" Relationship="andmebaasSpordiklubmodel.LiikmeLiikmelisuePaketti" FromRole="Liikme" ToRole="LiikmelisuePaketti" />
+          <NavigationProperty Name="Registreerimine" Relationship="andmebaasSpordiklubmodel.LiikmeRegistreerimine" FromRole="Liikme" ToRole="Registreerimine" />
+          <NavigationProperty Name="LiikVoistluses" Relationship="andmebaasSpordiklubmodel.LiikmeLiikVoistluses" FromRole="Liikme" ToRole="LiikVoistluses" />
+        </EntityType>
+        <EntityType Name="LiikmelisuePaketti">
+          <Key>
+            <PropertyRef Name="PaketID" />
+          </Key>
+          <Property Name="PaketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="kuutasu" Type="Int32" Nullable="false" />
+          <Property Name="kirjeldus" Type="String" Nullable="false" />
+          <NavigationProperty Name="Liikme" Relationship="andmebaasSpordiklubmodel.LiikmeLiikmelisuePaketti" FromRole="LiikmelisuePaketti" ToRole="Liikme" />
+        </EntityType>
+        <EntityType Name="Treener">
+          <Key>
+            <PropertyRef Name="TreenerId" />
+          </Key>
+          <Property Name="TreenerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="epost" Type="String" Nullable="false" />
+          <Property Name="telefon" Type="Int32" Nullable="false" />
+          <Property Name="eriala" Type="String" Nullable="false" />
+          <NavigationProperty Name="Treening" Relationship="andmebaasSpordiklubmodel.TreenerTreening" FromRole="Treener" ToRole="Treening" />
+        </EntityType>
+        <Association Name="LiikmeLiikmelisuePaketti">
+          <End Type="andmebaasSpordiklubmodel.Liikme" Role="Liikme" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.LiikmelisuePaketti" Role="LiikmelisuePaketti" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Saal">
+          <Key>
+            <PropertyRef Name="SaalID" />
+          </Key>
+          <Property Name="SaalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="maksimaalnemahutavus" Type="String" Nullable="false" />
+          <NavigationProperty Name="Treening" Relationship="andmebaasSpordiklubmodel.SaalTreening" FromRole="Saal" ToRole="Treening" />
+        </EntityType>
+        <EntityType Name="Registreerimine">
+          <Key>
+            <PropertyRef Name="RegistreerimineId" />
+          </Key>
+          <Property Name="RegistreerimineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="registreerimisekuupaev" Type="DateTime" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Liikme" Relationship="andmebaasSpordiklubmodel.LiikmeRegistreerimine" FromRole="Registreerimine" ToRole="Liikme" />
+          <NavigationProperty Name="Treening" Relationship="andmebaasSpordiklubmodel.RegistreerimineTreening" FromRole="Registreerimine" ToRole="Treening" />
+        </EntityType>
+        <Association Name="LiikmeRegistreerimine">
+          <End Type="andmebaasSpordiklubmodel.Liikme" Role="Liikme" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Registreerimine" Role="Registreerimine" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Voistlus">
+          <Key>
+            <PropertyRef Name="VoistlusId" />
+          </Key>
+          <Property Name="VoistlusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="kuupaev" Type="DateTime" Nullable="false" />
+          <Property Name="asukoht" Type="String" Nullable="false" />
+          <Property Name="kirjeldus" Type="String" Nullable="false" />
+          <NavigationProperty Name="Spordiala" Relationship="andmebaasSpordiklubmodel.SpordialaVoistlus" FromRole="Voistlus" ToRole="Spordiala" />
+          <NavigationProperty Name="LiikVoistluses" Relationship="andmebaasSpordiklubmodel.VoistlusLiikVoistluses" FromRole="Voistlus" ToRole="LiikVoistluses" />
+        </EntityType>
+        <EntityType Name="Spordiala">
+          <Key>
+            <PropertyRef Name="SporidalaID" />
+          </Key>
+          <Property Name="SporidalaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="kirjeldus" Type="String" Nullable="false" />
+          <NavigationProperty Name="Voistlus" Relationship="andmebaasSpordiklubmodel.SpordialaVoistlus" FromRole="Spordiala" ToRole="Voistlus" />
+        </EntityType>
+        <Association Name="SpordialaVoistlus">
+          <End Type="andmebaasSpordiklubmodel.Spordiala" Role="Spordiala" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Voistlus" Role="Voistlus" Multiplicity="*" />
+        </Association>
+        <EntityType Name="LiikVoistluses">
+          <Key>
+            <PropertyRef Name="LiikVoistlusesID" />
+          </Key>
+          <Property Name="LiikVoistlusesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Liikme" Relationship="andmebaasSpordiklubmodel.LiikmeLiikVoistluses" FromRole="LiikVoistluses" ToRole="Liikme" />
+          <NavigationProperty Name="Voistlus" Relationship="andmebaasSpordiklubmodel.VoistlusLiikVoistluses" FromRole="LiikVoistluses" ToRole="Voistlus" />
+          <NavigationProperty Name="Osalemine" Relationship="andmebaasSpordiklubmodel.LiikVoistlusesOsalemine" FromRole="LiikVoistluses" ToRole="Osalemine" />
+        </EntityType>
+        <Association Name="LiikmeLiikVoistluses">
+          <End Type="andmebaasSpordiklubmodel.Liikme" Role="Liikme" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.LiikVoistluses" Role="LiikVoistluses" Multiplicity="*" />
+        </Association>
+        <Association Name="VoistlusLiikVoistluses">
+          <End Type="andmebaasSpordiklubmodel.Voistlus" Role="Voistlus" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.LiikVoistluses" Role="LiikVoistluses" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Treening">
+          <Key>
+            <PropertyRef Name="TreeningID" />
+          </Key>
+          <Property Name="TreeningID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="kirjeldus" Type="String" Nullable="false" />
+          <Property Name="kestus" Type="Int32" Nullable="false" />
+          <Property Name="raskusaste" Type="String" Nullable="false" />
+          <Property Name="aeg" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Saal" Relationship="andmebaasSpordiklubmodel.SaalTreening" FromRole="Treening" ToRole="Saal" />
+          <NavigationProperty Name="Treener" Relationship="andmebaasSpordiklubmodel.TreenerTreening" FromRole="Treening" ToRole="Treener" />
+          <NavigationProperty Name="Registreerimine" Relationship="andmebaasSpordiklubmodel.RegistreerimineTreening" FromRole="Treening" ToRole="Registreerimine" />
+        </EntityType>
+        <Association Name="SaalTreening">
+          <End Type="andmebaasSpordiklubmodel.Saal" Role="Saal" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Treening" Role="Treening" Multiplicity="*" />
+        </Association>
+        <Association Name="TreenerTreening">
+          <End Type="andmebaasSpordiklubmodel.Treener" Role="Treener" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Treening" Role="Treening" Multiplicity="*" />
+        </Association>
+        <Association Name="RegistreerimineTreening">
+          <End Type="andmebaasSpordiklubmodel.Registreerimine" Role="Registreerimine" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Treening" Role="Treening" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Osalemine">
+          <Key>
+            <PropertyRef Name="OsalemineId" />
+          </Key>
+          <Property Name="OsalemineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tulemus" Type="String" Nullable="false" />
+          <Property Name="koht" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LiikVoistluses" Relationship="andmebaasSpordiklubmodel.LiikVoistlusesOsalemine" FromRole="Osalemine" ToRole="LiikVoistluses" />
+        </EntityType>
+        <Association Name="LiikVoistlusesOsalemine">
+          <End Type="andmebaasSpordiklubmodel.LiikVoistluses" Role="LiikVoistluses" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Osalemine" Role="Osalemine" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Ost">
+          <Key>
+            <PropertyRef Name="OstID" />
+          </Key>
+          <Property Name="OstID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ostuskuupaev" Type="DateTime" Nullable="false" />
+          <Property Name="kogus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Osturida" Relationship="andmebaasSpordiklubmodel.OstOsturida" FromRole="Ost" ToRole="Osturida" />
+        </EntityType>
+        <EntityType Name="Toode">
+          <Key>
+            <PropertyRef Name="ToodeID" />
+          </Key>
+          <Property Name="ToodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nimi" Type="String" Nullable="false" />
+          <Property Name="hind" Type="Int32" Nullable="false" />
+          <Property Name="kirjeldus" Type="String" Nullable="false" />
+          <Property Name="laoseis" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Osturida" Relationship="andmebaasSpordiklubmodel.ToodeOsturida" FromRole="Toode" ToRole="Osturida" />
+        </EntityType>
+        <EntityType Name="Osturida">
+          <Key>
+            <PropertyRef Name="OsturidaID" />
+          </Key>
+          <Property Name="OsturidaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kogus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ost" Relationship="andmebaasSpordiklubmodel.OstOsturida" FromRole="Osturida" ToRole="Ost" />
+          <NavigationProperty Name="Toode" Relationship="andmebaasSpordiklubmodel.ToodeOsturida" FromRole="Osturida" ToRole="Toode" />
+        </EntityType>
+        <Association Name="OstOsturida">
+          <End Type="andmebaasSpordiklubmodel.Ost" Role="Ost" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Osturida" Role="Osturida" Multiplicity="*" />
+        </Association>
+        <Association Name="ToodeOsturida">
+          <End Type="andmebaasSpordiklubmodel.Toode" Role="Toode" Multiplicity="1" />
+          <End Type="andmebaasSpordiklubmodel.Osturida" Role="Osturida" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="andmebaasSpordiklubmodelStoreContainer" CdmEntityContainer="andmebaasSpordiklubmodelContainer">
+    <EntitySetMapping Name="LiikmeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Liikme)">
+        <MappingFragment StoreEntitySet="LiikmeSet">
+          <ScalarProperty Name="LiikmeId" ColumnName="LiikmeId" />
+          <ScalarProperty Name="eesnimi" ColumnName="eesnimi" />
+          <ScalarProperty Name="perekonnanimi" ColumnName="perekonnanimi" />
+          <ScalarProperty Name="sunniaeg" ColumnName="sunniaeg" />
+          <ScalarProperty Name="epost" ColumnName="epost" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiikmelisuePakettiSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.LiikmelisuePaketti)">
+        <MappingFragment StoreEntitySet="LiikmelisuePakettiSet">
+          <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="kuutasu" ColumnName="kuutasu" />
+          <ScalarProperty Name="kirjeldus" ColumnName="kirjeldus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TreenerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Treener)">
+        <MappingFragment StoreEntitySet="TreenerSet">
+          <ScalarProperty Name="TreenerId" ColumnName="TreenerId" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="epost" ColumnName="epost" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="eriala" ColumnName="eriala" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SaalSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Saal)">
+        <MappingFragment StoreEntitySet="SaalSet">
+          <ScalarProperty Name="SaalID" ColumnName="SaalID" />
+          <ScalarProperty Name="number" ColumnName="number" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="maksimaalnemahutavus" ColumnName="maksimaalnemahutavus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegistreerimineSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Registreerimine)">
+        <MappingFragment StoreEntitySet="RegistreerimineSet">
+          <ScalarProperty Name="RegistreerimineId" ColumnName="RegistreerimineId" />
+          <ScalarProperty Name="registreerimisekuupaev" ColumnName="registreerimisekuupaev" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VoistlusSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Voistlus)">
+        <MappingFragment StoreEntitySet="VoistlusSet">
+          <ScalarProperty Name="VoistlusId" ColumnName="VoistlusId" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="kuupaev" ColumnName="kuupaev" />
+          <ScalarProperty Name="asukoht" ColumnName="asukoht" />
+          <ScalarProperty Name="kirjeldus" ColumnName="kirjeldus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpordialaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Spordiala)">
+        <MappingFragment StoreEntitySet="SpordialaSet">
+          <ScalarProperty Name="SporidalaID" ColumnName="SporidalaID" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="kirjeldus" ColumnName="kirjeldus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiikVoistlusesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.LiikVoistluses)">
+        <MappingFragment StoreEntitySet="LiikVoistlusesSet">
+          <ScalarProperty Name="LiikVoistlusesID" ColumnName="LiikVoistlusesID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TreeningSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Treening)">
+        <MappingFragment StoreEntitySet="TreeningSet">
+          <ScalarProperty Name="TreeningID" ColumnName="TreeningID" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="kirjeldus" ColumnName="kirjeldus" />
+          <ScalarProperty Name="kestus" ColumnName="kestus" />
+          <ScalarProperty Name="raskusaste" ColumnName="raskusaste" />
+          <ScalarProperty Name="aeg" ColumnName="aeg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LiikmeLiikmelisuePaketti" TypeName="andmebaasSpordiklubmodel.LiikmeLiikmelisuePaketti" StoreEntitySet="LiikmelisuePakettiSet">
+      <EndProperty Name="Liikme">
+        <ScalarProperty Name="LiikmeId" ColumnName="Liikme_LiikmeId" />
+      </EndProperty>
+      <EndProperty Name="LiikmelisuePaketti">
+        <ScalarProperty Name="PaketID" ColumnName="PaketID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LiikmeRegistreerimine" TypeName="andmebaasSpordiklubmodel.LiikmeRegistreerimine" StoreEntitySet="RegistreerimineSet">
+      <EndProperty Name="Liikme">
+        <ScalarProperty Name="LiikmeId" ColumnName="Liikme_LiikmeId" />
+      </EndProperty>
+      <EndProperty Name="Registreerimine">
+        <ScalarProperty Name="RegistreerimineId" ColumnName="RegistreerimineId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SpordialaVoistlus" TypeName="andmebaasSpordiklubmodel.SpordialaVoistlus" StoreEntitySet="VoistlusSet">
+      <EndProperty Name="Spordiala">
+        <ScalarProperty Name="SporidalaID" ColumnName="Spordiala_SporidalaID" />
+      </EndProperty>
+      <EndProperty Name="Voistlus">
+        <ScalarProperty Name="VoistlusId" ColumnName="VoistlusId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LiikmeLiikVoistluses" TypeName="andmebaasSpordiklubmodel.LiikmeLiikVoistluses" StoreEntitySet="LiikVoistlusesSet">
+      <EndProperty Name="Liikme">
+        <ScalarProperty Name="LiikmeId" ColumnName="Liikme_LiikmeId" />
+      </EndProperty>
+      <EndProperty Name="LiikVoistluses">
+        <ScalarProperty Name="LiikVoistlusesID" ColumnName="LiikVoistlusesID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VoistlusLiikVoistluses" TypeName="andmebaasSpordiklubmodel.VoistlusLiikVoistluses" StoreEntitySet="LiikVoistlusesSet">
+      <EndProperty Name="Voistlus">
+        <ScalarProperty Name="VoistlusId" ColumnName="Voistlus_VoistlusId" />
+      </EndProperty>
+      <EndProperty Name="LiikVoistluses">
+        <ScalarProperty Name="LiikVoistlusesID" ColumnName="LiikVoistlusesID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SaalTreening" TypeName="andmebaasSpordiklubmodel.SaalTreening" StoreEntitySet="TreeningSet">
+      <EndProperty Name="Saal">
+        <ScalarProperty Name="SaalID" ColumnName="Saal_SaalID" />
+      </EndProperty>
+      <EndProperty Name="Treening">
+        <ScalarProperty Name="TreeningID" ColumnName="TreeningID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TreenerTreening" TypeName="andmebaasSpordiklubmodel.TreenerTreening" StoreEntitySet="TreeningSet">
+      <EndProperty Name="Treener">
+        <ScalarProperty Name="TreenerId" ColumnName="Treener_TreenerId" />
+      </EndProperty>
+      <EndProperty Name="Treening">
+        <ScalarProperty Name="TreeningID" ColumnName="TreeningID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegistreerimineTreening" TypeName="andmebaasSpordiklubmodel.RegistreerimineTreening" StoreEntitySet="TreeningSet">
+      <EndProperty Name="Registreerimine">
+        <ScalarProperty Name="RegistreerimineId" ColumnName="Registreerimine_RegistreerimineId" />
+      </EndProperty>
+      <EndProperty Name="Treening">
+        <ScalarProperty Name="TreeningID" ColumnName="TreeningID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

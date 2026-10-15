@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2026 12:52:38
+-- Date Created: 10/15/2026 10:30:18
 -- Generated from EDMX file: C:\Users\opilane\source\repos\SpordiKlubModel\SpordiKlubModel\andmebaasSpordiklubmodel.edmx
 -- --------------------------------------------------
 
@@ -41,6 +41,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RegistreerimineTreening]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TreeningSet] DROP CONSTRAINT [FK_RegistreerimineTreening];
 GO
+IF OBJECT_ID(N'[dbo].[FK_LiikVoistlusesOsalemine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OsalemineSet] DROP CONSTRAINT [FK_LiikVoistlusesOsalemine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OstOsturida]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OsturidaSet] DROP CONSTRAINT [FK_OstOsturida];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ToodeOsturida]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OsturidaSet] DROP CONSTRAINT [FK_ToodeOsturida];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -73,6 +82,18 @@ GO
 IF OBJECT_ID(N'[dbo].[TreeningSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TreeningSet];
 GO
+IF OBJECT_ID(N'[dbo].[OsalemineSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OsalemineSet];
+GO
+IF OBJECT_ID(N'[dbo].[OstSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OstSet];
+GO
+IF OBJECT_ID(N'[dbo].[ToodeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ToodeSet];
+GO
+IF OBJECT_ID(N'[dbo].[OsturidaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OsturidaSet];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -83,9 +104,9 @@ CREATE TABLE [dbo].[LiikmeSet] (
     [LiikmeId] int IDENTITY(1,1) NOT NULL,
     [eesnimi] nvarchar(max)  NOT NULL,
     [perekonnanimi] nvarchar(max)  NOT NULL,
-    [sunniaeg] nvarchar(max)  NOT NULL,
+    [sunniaeg] datetime  NOT NULL,
     [epost] nvarchar(max)  NOT NULL,
-    [telefon] nvarchar(max)  NOT NULL
+    [telefon] int  NOT NULL
 );
 GO
 
@@ -93,7 +114,7 @@ GO
 CREATE TABLE [dbo].[LiikmelisuePakettiSet] (
     [PaketID] int IDENTITY(1,1) NOT NULL,
     [nimi] nvarchar(max)  NOT NULL,
-    [kuutasu] nvarchar(max)  NOT NULL,
+    [kuutasu] int  NOT NULL,
     [kirjeldus] nvarchar(max)  NOT NULL,
     [Liikme_LiikmeId] int  NOT NULL
 );
@@ -104,7 +125,7 @@ CREATE TABLE [dbo].[TreenerSet] (
     [TreenerId] int IDENTITY(1,1) NOT NULL,
     [nimi] nvarchar(max)  NOT NULL,
     [epost] nvarchar(max)  NOT NULL,
-    [telefon] nvarchar(max)  NOT NULL,
+    [telefon] int  NOT NULL,
     [eriala] nvarchar(max)  NOT NULL
 );
 GO
@@ -112,7 +133,7 @@ GO
 -- Creating table 'SaalSet'
 CREATE TABLE [dbo].[SaalSet] (
     [SaalID] int IDENTITY(1,1) NOT NULL,
-    [number] nvarchar(max)  NOT NULL,
+    [number] int  NOT NULL,
     [nimi] nvarchar(max)  NOT NULL,
     [maksimaalnemahutavus] nvarchar(max)  NOT NULL
 );
@@ -121,8 +142,8 @@ GO
 -- Creating table 'RegistreerimineSet'
 CREATE TABLE [dbo].[RegistreerimineSet] (
     [RegistreerimineId] int IDENTITY(1,1) NOT NULL,
-    [registreerimisekuupaev] nvarchar(max)  NOT NULL,
-    [status] nvarchar(max)  NOT NULL,
+    [registreerimisekuupaev] datetime  NOT NULL,
+    [status] bit  NOT NULL,
     [Liikme_LiikmeId] int  NOT NULL
 );
 GO
@@ -131,7 +152,7 @@ GO
 CREATE TABLE [dbo].[VoistlusSet] (
     [VoistlusId] int IDENTITY(1,1) NOT NULL,
     [nimi] nvarchar(max)  NOT NULL,
-    [kuupaev] nvarchar(max)  NOT NULL,
+    [kuupaev] datetime  NOT NULL,
     [asukoht] nvarchar(max)  NOT NULL,
     [kirjeldus] nvarchar(max)  NOT NULL,
     [Spordiala_SporidalaID] int  NOT NULL
@@ -159,12 +180,48 @@ CREATE TABLE [dbo].[TreeningSet] (
     [TreeningID] int IDENTITY(1,1) NOT NULL,
     [nimi] nvarchar(max)  NOT NULL,
     [kirjeldus] nvarchar(max)  NOT NULL,
-    [kestus] nvarchar(max)  NOT NULL,
+    [kestus] int  NOT NULL,
     [raskusaste] nvarchar(max)  NOT NULL,
-    [aeg] nvarchar(max)  NOT NULL,
+    [aeg] datetime  NOT NULL,
     [Saal_SaalID] int  NOT NULL,
     [Treener_TreenerId] int  NOT NULL,
     [Registreerimine_RegistreerimineId] int  NOT NULL
+);
+GO
+
+-- Creating table 'OsalemineSet'
+CREATE TABLE [dbo].[OsalemineSet] (
+    [OsalemineId] int IDENTITY(1,1) NOT NULL,
+    [tulemus] nvarchar(max)  NOT NULL,
+    [koht] int  NOT NULL,
+    [LiikVoistluses_LiikVoistlusesID] int  NOT NULL
+);
+GO
+
+-- Creating table 'OstSet'
+CREATE TABLE [dbo].[OstSet] (
+    [OstID] int IDENTITY(1,1) NOT NULL,
+    [ostuskuupaev] datetime  NOT NULL,
+    [kogus] int  NOT NULL
+);
+GO
+
+-- Creating table 'ToodeSet'
+CREATE TABLE [dbo].[ToodeSet] (
+    [ToodeID] int IDENTITY(1,1) NOT NULL,
+    [nimi] nvarchar(max)  NOT NULL,
+    [hind] int  NOT NULL,
+    [kirjeldus] nvarchar(max)  NOT NULL,
+    [laoseis] bit  NOT NULL
+);
+GO
+
+-- Creating table 'OsturidaSet'
+CREATE TABLE [dbo].[OsturidaSet] (
+    [OsturidaID] int IDENTITY(1,1) NOT NULL,
+    [kogus] int  NOT NULL,
+    [Ost_OstID] int  NOT NULL,
+    [Toode_ToodeID] int  NOT NULL
 );
 GO
 
@@ -224,6 +281,30 @@ GO
 ALTER TABLE [dbo].[TreeningSet]
 ADD CONSTRAINT [PK_TreeningSet]
     PRIMARY KEY CLUSTERED ([TreeningID] ASC);
+GO
+
+-- Creating primary key on [OsalemineId] in table 'OsalemineSet'
+ALTER TABLE [dbo].[OsalemineSet]
+ADD CONSTRAINT [PK_OsalemineSet]
+    PRIMARY KEY CLUSTERED ([OsalemineId] ASC);
+GO
+
+-- Creating primary key on [OstID] in table 'OstSet'
+ALTER TABLE [dbo].[OstSet]
+ADD CONSTRAINT [PK_OstSet]
+    PRIMARY KEY CLUSTERED ([OstID] ASC);
+GO
+
+-- Creating primary key on [ToodeID] in table 'ToodeSet'
+ALTER TABLE [dbo].[ToodeSet]
+ADD CONSTRAINT [PK_ToodeSet]
+    PRIMARY KEY CLUSTERED ([ToodeID] ASC);
+GO
+
+-- Creating primary key on [OsturidaID] in table 'OsturidaSet'
+ALTER TABLE [dbo].[OsturidaSet]
+ADD CONSTRAINT [PK_OsturidaSet]
+    PRIMARY KEY CLUSTERED ([OsturidaID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -348,6 +429,51 @@ GO
 CREATE INDEX [IX_FK_RegistreerimineTreening]
 ON [dbo].[TreeningSet]
     ([Registreerimine_RegistreerimineId]);
+GO
+
+-- Creating foreign key on [LiikVoistluses_LiikVoistlusesID] in table 'OsalemineSet'
+ALTER TABLE [dbo].[OsalemineSet]
+ADD CONSTRAINT [FK_LiikVoistlusesOsalemine]
+    FOREIGN KEY ([LiikVoistluses_LiikVoistlusesID])
+    REFERENCES [dbo].[LiikVoistlusesSet]
+        ([LiikVoistlusesID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_LiikVoistlusesOsalemine'
+CREATE INDEX [IX_FK_LiikVoistlusesOsalemine]
+ON [dbo].[OsalemineSet]
+    ([LiikVoistluses_LiikVoistlusesID]);
+GO
+
+-- Creating foreign key on [Ost_OstID] in table 'OsturidaSet'
+ALTER TABLE [dbo].[OsturidaSet]
+ADD CONSTRAINT [FK_OstOsturida]
+    FOREIGN KEY ([Ost_OstID])
+    REFERENCES [dbo].[OstSet]
+        ([OstID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OstOsturida'
+CREATE INDEX [IX_FK_OstOsturida]
+ON [dbo].[OsturidaSet]
+    ([Ost_OstID]);
+GO
+
+-- Creating foreign key on [Toode_ToodeID] in table 'OsturidaSet'
+ALTER TABLE [dbo].[OsturidaSet]
+ADD CONSTRAINT [FK_ToodeOsturida]
+    FOREIGN KEY ([Toode_ToodeID])
+    REFERENCES [dbo].[ToodeSet]
+        ([ToodeID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ToodeOsturida'
+CREATE INDEX [IX_FK_ToodeOsturida]
+ON [dbo].[OsturidaSet]
+    ([Toode_ToodeID]);
 GO
 
 -- --------------------------------------------------

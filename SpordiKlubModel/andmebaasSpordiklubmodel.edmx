@@ -15,6 +15,10 @@
     <EntitySet Name="SpordialaSet" EntityType="andmebaasSpordiklubmodel.Store.SpordialaSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LiikVoistlusesSet" EntityType="andmebaasSpordiklubmodel.Store.LiikVoistlusesSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TreeningSet" EntityType="andmebaasSpordiklubmodel.Store.TreeningSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OsalemineSet" EntityType="andmebaasSpordiklubmodel.Store.OsalemineSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OstSet" EntityType="andmebaasSpordiklubmodel.Store.OstSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ToodeSet" EntityType="andmebaasSpordiklubmodel.Store.ToodeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OsturidaSet" EntityType="andmebaasSpordiklubmodel.Store.OsturidaSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="LiikmeLiikmelisuePaketti" Association="andmebaasSpordiklubmodel.Store.LiikmeLiikmelisuePaketti">
       <End Role="Liikme" EntitySet="LiikmeSet" />
       <End Role="LiikmelisuePaketti" EntitySet="LiikmelisuePakettiSet" />
@@ -47,6 +51,18 @@
       <End Role="Registreerimine" EntitySet="RegistreerimineSet" />
       <End Role="Treening" EntitySet="TreeningSet" />
     </AssociationSet>
+    <AssociationSet Name="LiikVoistlusesOsalemine" Association="andmebaasSpordiklubmodel.Store.LiikVoistlusesOsalemine">
+      <End Role="LiikVoistluses" EntitySet="LiikVoistlusesSet" />
+      <End Role="Osalemine" EntitySet="OsalemineSet" />
+    </AssociationSet>
+    <AssociationSet Name="OstOsturida" Association="andmebaasSpordiklubmodel.Store.OstOsturida">
+      <End Role="Ost" EntitySet="OstSet" />
+      <End Role="Osturida" EntitySet="OsturidaSet" />
+    </AssociationSet>
+    <AssociationSet Name="ToodeOsturida" Association="andmebaasSpordiklubmodel.Store.ToodeOsturida">
+      <End Role="Toode" EntitySet="ToodeSet" />
+      <End Role="Osturida" EntitySet="OsturidaSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="LiikmeSet">
     <Key>
@@ -55,9 +71,9 @@
     <Property Name="LiikmeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="eesnimi" Type="nvarchar(max)" Nullable="false" />
     <Property Name="perekonnanimi" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="sunniaeg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sunniaeg" Type="datetime" Nullable="false" />
     <Property Name="epost" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefon" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="LiikmelisuePakettiSet">
     <Key>
@@ -65,7 +81,7 @@
     </Key>
     <Property Name="PaketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="kuutasu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kuutasu" Type="int" Nullable="false" />
     <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Liikme_LiikmeId" Type="int" Nullable="false" />
   </EntityType>
@@ -76,7 +92,7 @@
     <Property Name="TreenerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
     <Property Name="epost" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefon" Type="int" Nullable="false" />
     <Property Name="eriala" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="SaalSet">
@@ -84,7 +100,7 @@
       <PropertyRef Name="SaalID" />
     </Key>
     <Property Name="SaalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="number" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="number" Type="int" Nullable="false" />
     <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
     <Property Name="maksimaalnemahutavus" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -93,8 +109,8 @@
       <PropertyRef Name="RegistreerimineId" />
     </Key>
     <Property Name="RegistreerimineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="registreerimisekuupaev" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="registreerimisekuupaev" Type="datetime" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
     <Property Name="Liikme_LiikmeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="VoistlusSet">
@@ -103,7 +119,7 @@
     </Key>
     <Property Name="VoistlusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="kuupaev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kuupaev" Type="datetime" Nullable="false" />
     <Property Name="asukoht" Type="nvarchar(max)" Nullable="false" />
     <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Spordiala_SporidalaID" Type="int" Nullable="false" />
@@ -131,12 +147,48 @@
     <Property Name="TreeningID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
     <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="kestus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="kestus" Type="int" Nullable="false" />
     <Property Name="raskusaste" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="aeg" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="aeg" Type="datetime" Nullable="false" />
     <Property Name="Saal_SaalID" Type="int" Nullable="false" />
     <Property Name="Treener_TreenerId" Type="int" Nullable="false" />
     <Property Name="Registreerimine_RegistreerimineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OsalemineSet">
+    <Key>
+      <PropertyRef Name="OsalemineId" />
+    </Key>
+    <Property Name="OsalemineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tulemus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="koht" Type="int" Nullable="false" />
+    <Property Name="LiikVoistluses_LiikVoistlusesID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OstSet">
+    <Key>
+      <PropertyRef Name="OstID" />
+    </Key>
+    <Property Name="OstID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ostuskuupaev" Type="datetime" Nullable="false" />
+    <Property Name="kogus" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ToodeSet">
+    <Key>
+      <PropertyRef Name="ToodeID" />
+    </Key>
+    <Property Name="ToodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="hind" Type="int" Nullable="false" />
+    <Property Name="kirjeldus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="laoseis" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OsturidaSet">
+    <Key>
+      <PropertyRef Name="OsturidaID" />
+    </Key>
+    <Property Name="OsturidaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kogus" Type="int" Nullable="false" />
+    <Property Name="Ost_OstID" Type="int" Nullable="false" />
+    <Property Name="Toode_ToodeID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="LiikmeLiikmelisuePaketti">
     <End Role="Liikme" Type="andmebaasSpordiklubmodel.Store.LiikmeSet" Multiplicity="1" />
@@ -231,6 +283,42 @@
       </Principal>
       <Dependent Role="Treening">
         <PropertyRef Name="Registreerimine_RegistreerimineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LiikVoistlusesOsalemine">
+    <End Role="LiikVoistluses" Type="andmebaasSpordiklubmodel.Store.LiikVoistlusesSet" Multiplicity="1" />
+    <End Role="Osalemine" Type="andmebaasSpordiklubmodel.Store.OsalemineSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LiikVoistluses">
+        <PropertyRef Name="LiikVoistlusesID" />
+      </Principal>
+      <Dependent Role="Osalemine">
+        <PropertyRef Name="LiikVoistluses_LiikVoistlusesID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OstOsturida">
+    <End Role="Ost" Type="andmebaasSpordiklubmodel.Store.OstSet" Multiplicity="1" />
+    <End Role="Osturida" Type="andmebaasSpordiklubmodel.Store.OsturidaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ost">
+        <PropertyRef Name="OstID" />
+      </Principal>
+      <Dependent Role="Osturida">
+        <PropertyRef Name="Ost_OstID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ToodeOsturida">
+    <End Role="Toode" Type="andmebaasSpordiklubmodel.Store.ToodeSet" Multiplicity="1" />
+    <End Role="Osturida" Type="andmebaasSpordiklubmodel.Store.OsturidaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Toode">
+        <PropertyRef Name="ToodeID" />
+      </Principal>
+      <Dependent Role="Osturida">
+        <PropertyRef Name="Toode_ToodeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -575,6 +663,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OsalemineSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Osalemine)">
+        <MappingFragment StoreEntitySet="OsalemineSet">
+          <ScalarProperty Name="OsalemineId" ColumnName="OsalemineId" />
+          <ScalarProperty Name="tulemus" ColumnName="tulemus" />
+          <ScalarProperty Name="koht" ColumnName="koht" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OstSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Ost)">
+        <MappingFragment StoreEntitySet="OstSet">
+          <ScalarProperty Name="OstID" ColumnName="OstID" />
+          <ScalarProperty Name="ostuskuupaev" ColumnName="ostuskuupaev" />
+          <ScalarProperty Name="kogus" ColumnName="kogus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToodeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Toode)">
+        <MappingFragment StoreEntitySet="ToodeSet">
+          <ScalarProperty Name="ToodeID" ColumnName="ToodeID" />
+          <ScalarProperty Name="nimi" ColumnName="nimi" />
+          <ScalarProperty Name="hind" ColumnName="hind" />
+          <ScalarProperty Name="kirjeldus" ColumnName="kirjeldus" />
+          <ScalarProperty Name="laoseis" ColumnName="laoseis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OsturidaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(andmebaasSpordiklubmodel.Osturida)">
+        <MappingFragment StoreEntitySet="OsturidaSet">
+          <ScalarProperty Name="OsturidaID" ColumnName="OsturidaID" />
+          <ScalarProperty Name="kogus" ColumnName="kogus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="LiikmeLiikmelisuePaketti" TypeName="andmebaasSpordiklubmodel.LiikmeLiikmelisuePaketti" StoreEntitySet="LiikmelisuePakettiSet">
       <EndProperty Name="Liikme">
         <ScalarProperty Name="LiikmeId" ColumnName="Liikme_LiikmeId" />
@@ -637,6 +762,30 @@
       </EndProperty>
       <EndProperty Name="Treening">
         <ScalarProperty Name="TreeningID" ColumnName="TreeningID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LiikVoistlusesOsalemine" TypeName="andmebaasSpordiklubmodel.LiikVoistlusesOsalemine" StoreEntitySet="OsalemineSet">
+      <EndProperty Name="LiikVoistluses">
+        <ScalarProperty Name="LiikVoistlusesID" ColumnName="LiikVoistluses_LiikVoistlusesID" />
+      </EndProperty>
+      <EndProperty Name="Osalemine">
+        <ScalarProperty Name="OsalemineId" ColumnName="OsalemineId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OstOsturida" TypeName="andmebaasSpordiklubmodel.OstOsturida" StoreEntitySet="OsturidaSet">
+      <EndProperty Name="Ost">
+        <ScalarProperty Name="OstID" ColumnName="Ost_OstID" />
+      </EndProperty>
+      <EndProperty Name="Osturida">
+        <ScalarProperty Name="OsturidaID" ColumnName="OsturidaID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ToodeOsturida" TypeName="andmebaasSpordiklubmodel.ToodeOsturida" StoreEntitySet="OsturidaSet">
+      <EndProperty Name="Toode">
+        <ScalarProperty Name="ToodeID" ColumnName="Toode_ToodeID" />
+      </EndProperty>
+      <EndProperty Name="Osturida">
+        <ScalarProperty Name="OsturidaID" ColumnName="OsturidaID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

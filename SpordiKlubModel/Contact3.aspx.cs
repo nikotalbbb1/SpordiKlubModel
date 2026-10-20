@@ -13,5 +13,22 @@ namespace SpordiKlubModel
         {
 
         }
+
+        protected void DetailsView1_ItemInserted(object sender, DetailsViewInsertedEventArgs e)
+        {
+            lblSonum.Visible = true;
+            if (e.Exception == null)
+            {
+                lblSonum.ForeColor = System.Drawing.Color.Green;
+                lblSonum.Text = "Andmed on lisatud";
+            }
+            else
+            {
+                lblSonum.ForeColor = System.Drawing.Color.Red;
+                lblSonum.Text = "Viga: andmeid ei lisatud";
+                e.ExceptionHandled = true;
+                e.KeepInInsertMode = true;
+            }
+        }
     }
 }

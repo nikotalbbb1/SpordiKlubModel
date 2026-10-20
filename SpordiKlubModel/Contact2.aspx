@@ -7,7 +7,7 @@
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="PaketID" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:CommandField ShowDeleteButton="True" />
+            <asp:CommandField ShowDeleteButton="True" DeleteText="Kustuta" />
             <asp:BoundField DataField="PaketID" HeaderText="PaketID" ReadOnly="True" SortExpression="PaketID" />
             <asp:BoundField DataField="nimi" HeaderText="nimi" SortExpression="nimi" />
             <asp:BoundField DataField="kuutasu" HeaderText="kuutasu" SortExpression="kuutasu" />

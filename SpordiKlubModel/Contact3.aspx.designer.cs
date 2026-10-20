@@ -24,12 +24,30 @@ namespace SpordiKlubModel
         protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
 
         /// <summary>
-        /// SqlDataSource1pakett control.
+        /// lblSonum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1pakett;
+        protected global::System.Web.UI.WebControls.Label lblSonum;
+
+        /// <summary>
+        /// SqlDataSource_liikmed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource_liikmed;
+
+        /// <summary>
+        /// SqlDataSource1_lisapaketti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1_lisapaketti;
     }
 }

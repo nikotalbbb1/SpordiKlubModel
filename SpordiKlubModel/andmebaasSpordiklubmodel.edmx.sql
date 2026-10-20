@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/15/2026 10:30:18
+-- Date Created: 10/20/2026 08:42:31
 -- Generated from EDMX file: C:\Users\opilane\source\repos\SpordiKlubModel\SpordiKlubModel\andmebaasSpordiklubmodel.edmx
 -- --------------------------------------------------
 

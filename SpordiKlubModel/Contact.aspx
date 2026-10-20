@@ -7,7 +7,7 @@
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TreenerId" DataSourceID="SqlDataSource1" EmptyDataText="There are no data records to display." ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" DeleteText="Kustuta" EditText="Muuta" />
             <asp:BoundField DataField="TreenerId" HeaderText="TreenerId" ReadOnly="True" SortExpression="TreenerId" />
             <asp:BoundField DataField="nimi" HeaderText="nimi" SortExpression="nimi" />
             <asp:BoundField DataField="epost" HeaderText="epost" SortExpression="epost" />
@@ -58,7 +58,7 @@
                 <asp:BoundField DataField="telefon" HeaderText="telefon" SortExpression="telefon" />
                 <asp:BoundField DataField="eriala" HeaderText="eriala" SortExpression="eriala" />
                 <asp:BoundField DataField="TreenerId" HeaderText="TreenerId" InsertVisible="False" ReadOnly="True" SortExpression="TreenerId" />
-                <asp:CommandField ShowInsertButton="True" />
+                <asp:CommandField ShowInsertButton="True" CancelText="Loobu" InsertText="Lisa" />
             </Fields>
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />

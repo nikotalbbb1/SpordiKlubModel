@@ -12,7 +12,7 @@
             <asp:BoundField DataField="nimi" HeaderText="nimi" SortExpression="nimi" />
             <asp:BoundField DataField="kuutasu" HeaderText="kuutasu" SortExpression="kuutasu" />
             <asp:BoundField DataField="kirjeldus" HeaderText="kirjeldus" SortExpression="kirjeldus" />
-            <asp:BoundField DataField="Liikme_LiikmeId" HeaderText="Liikme_LiikmeId" SortExpression="Liikme_LiikmeId" />
+            <asp:BoundField DataField="liige" HeaderText="Liige" SortExpression="liige" />
         </Columns>
         <EditRowStyle BackColor="#2461BF" />
         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -25,7 +25,7 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SportKlubConnectionString7 %>" DeleteCommand="DELETE FROM [LiikmelisuePakettiSet] WHERE [PaketID] = @PaketID" InsertCommand="INSERT INTO [LiikmelisuePakettiSet] ([nimi], [kuutasu], [kirjeldus], [Liikme_LiikmeId]) VALUES (@nimi, @kuutasu, @kirjeldus, @Liikme_LiikmeId)" SelectCommand="SELECT [PaketID], [nimi], [kuutasu], [kirjeldus], [Liikme_LiikmeId] FROM [LiikmelisuePakettiSet]" UpdateCommand="UPDATE [LiikmelisuePakettiSet] SET [nimi] = @nimi, [kuutasu] = @kuutasu, [kirjeldus] = @kirjeldus, [Liikme_LiikmeId] = @Liikme_LiikmeId WHERE [PaketID] = @PaketID">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SportKlubConnectionString7 %>" DeleteCommand="DELETE FROM [LiikmelisuePakettiSet] WHERE [PaketID] = @PaketID" InsertCommand="INSERT INTO [LiikmelisuePakettiSet] ([nimi], [kuutasu], [kirjeldus], [Liikme_LiikmeId]) VALUES (@nimi, @kuutasu, @kirjeldus, @Liikme_LiikmeId)" SelectCommand="SELECT p.[PaketID], p.[nimi], p.[kuutasu], p.[kirjeldus], p.[Liikme_LiikmeId], l.[eesnimi] + ' ' + l.[perekonnanimi] AS liige FROM [LiikmelisuePakettiSet] p LEFT JOIN [LiikmeSet] l ON l.[LiikmeId] = p.[Liikme_LiikmeId]" UpdateCommand="UPDATE [LiikmelisuePakettiSet] SET [nimi] = @nimi, [kuutasu] = @kuutasu, [kirjeldus] = @kirjeldus, [Liikme_LiikmeId] = @Liikme_LiikmeId WHERE [PaketID] = @PaketID">
         <DeleteParameters>
             <asp:Parameter Name="PaketID" Type="Int32" />
         </DeleteParameters>

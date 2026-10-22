@@ -11,7 +11,17 @@
                 <FieldHeaderStyle BackColor="#DEE8F5" Font-Bold="True" />
                 <Fields>
                     <asp:BoundField DataField="nimi" HeaderText="nimi" SortExpression="nimi" />
-                    <asp:BoundField DataField="kuutasu" HeaderText="kuutasu" SortExpression="kuutasu" />
+                    <asp:TemplateField HeaderText="kuutasu" SortExpression="kuutasu">
+                        <ItemTemplate>
+                            <asp:Label ID="lbl_kuutasu" runat="server" Text='<%# Eval("kuutasu") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txt_kuutasu_e" runat="server" TextMode="Number" min="0" step="1" Text='<%# Bind("kuutasu") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <InsertItemTemplate>
+                            <asp:TextBox ID="txt_kuutasu_i" runat="server" TextMode="Number" min="0" step="1" Text='<%# Bind("kuutasu") %>'></asp:TextBox>
+                        </InsertItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="kirjeldus" HeaderText="kirjeldus" SortExpression="kirjeldus" />
                     <asp:TemplateField HeaderText="Liige" SortExpression="Liikme_LiikmeId">
                         <InsertItemTemplate>

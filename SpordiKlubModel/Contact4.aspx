@@ -13,7 +13,17 @@
             <asp:CommandField DeleteText="Kustuta" EditText="Muuta" ShowDeleteButton="True" ShowEditButton="True" />
             <asp:BoundField DataField="ToodeID" HeaderText="ToodeID" ReadOnly="True" SortExpression="ToodeID" />
             <asp:BoundField DataField="nimi" HeaderText="nimi" SortExpression="nimi" />
-            <asp:BoundField DataField="hind" HeaderText="hind" SortExpression="hind" />
+            <asp:TemplateField HeaderText="hind" SortExpression="hind">
+                <ItemTemplate>
+                    <asp:Label ID="lbl_hind" runat="server" Text='<%# Eval("hind") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txt_hind_e" runat="server" TextMode="Number" min="0" step="1" Text='<%# Bind("hind") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    <asp:TextBox ID="txt_hind_i" runat="server" TextMode="Number" min="0" step="1" Text='<%# Bind("hind") %>'></asp:TextBox>
+                </InsertItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="kirjeldus" HeaderText="kirjeldus" SortExpression="kirjeldus" />
             <asp:CheckBoxField DataField="laoseis" HeaderText="laoseis" SortExpression="laoseis" />
         </Columns>
@@ -56,7 +66,17 @@
         <Fields>
             <asp:BoundField DataField="ToodeID" HeaderText="ToodeID" InsertVisible="False" ReadOnly="True" SortExpression="ToodeID" />
             <asp:BoundField DataField="nimi" HeaderText="nimi" SortExpression="nimi" />
-            <asp:BoundField DataField="hind" HeaderText="hind" SortExpression="hind" />
+            <asp:TemplateField HeaderText="hind" SortExpression="hind">
+                <ItemTemplate>
+                    <asp:Label ID="lbl_hind" runat="server" Text='<%# Eval("hind") %>'></asp:Label>
+                </ItemTemplate>
+                <EditItemTemplate>
+                    <asp:TextBox ID="txt_hind_e" runat="server" TextMode="Number" min="0" step="1" Text='<%# Bind("hind") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    <asp:TextBox ID="txt_hind_i" runat="server" TextMode="Number" min="0" step="1" Text='<%# Bind("hind") %>'></asp:TextBox>
+                </InsertItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="kirjeldus" HeaderText="kirjeldus" SortExpression="kirjeldus" />
             <asp:CheckBoxField DataField="laoseis" HeaderText="laoseis" SortExpression="laoseis" />
             <asp:CommandField ShowInsertButton="True" CancelText="Loobu" InsertText="Lisa" />

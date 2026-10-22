@@ -51,6 +51,7 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Treenerid</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact2">Paketid</a></li>
                          <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact3">Lisa pakett</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact4">Lisa Toode</a></li>
                     </ul>
                 </div>
             </div>
